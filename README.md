@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# API de Cursos
 
-## Getting Started
+Este proyecto es una API para la gestión de cursos. Proporciona endpoints para crear, leer, actualizar y eliminar cursos de una base de datos.
 
-First, run the development server:
+## Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Obtener una lista de todos los cursos
+- Agregar un nuevo curso
+- Actualizar un curso existente
+- Eliminar un curso
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologías
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Node.js](https://nodejs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Next.js](https://nextjs.org/)
+- [PostgreSQL](https://www.postgresql.org/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Comenzando
 
-## Learn More
+### Requisitos Previos
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js (v14 o posterior)
+- Base de datos PostgreSQL
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Instalación
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Clona el repositorio:
 
-## Deploy on Vercel
+    ```sh
+    git clone https://github.com/tuusuario/course-api.git
+    cd course-api
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Instala las dependencias:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    ```sh
+    npm install
+    ```
+
+3. Configura la base de datos:
+
+    En el archivo `src/utils/db.ts` coloca las credenciales de tu base de datos:
+
+    ```db.ts
+      user:
+      host:
+      database:
+      password:
+      port:
+    ```
+
+    La base de datos debe estar estructurada de la siguiente forma:
+
+    ```sql
+        CREATE TABLE course (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            description TEXT,
+            duration INT
+        );
+
+        CREATE TABLE student (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL UNIQUE
+        );
+
+        CREATE TABLE inscription (
+            id SERIAL PRIMARY KEY,
+            course_id INT REFERENCES course(id),
+            student_id INT REFERENCES student(id),
+            date DATE
+        );
+
+    ```
+
+### Ejecutando el Proyecto
+
+1. Inicia el servidor de desarrollo:
+
+    ```sh
+    npm run dev
+    ```
+
+2. Abre tu navegador y navega a `http://localhost:3000`

@@ -1,0 +1,7 @@
+.link {
+  @apply py-5 px-3 text-white hover:text-gray-200;
+}
+
+.active-link {
+  @apply text-blue-500;
+}
